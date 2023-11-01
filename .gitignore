@@ -1,0 +1,7 @@
+SOURCES/virtio-win-gt-x86.msi
+SOURCES/virtio-win-guest-tools.exe
+SOURCES/virtio-win-installer-1.9.19-11-sources.zip
+SOURCES/mingw-qemu-ga-win-102.10.0-0.el8_5.src.rpm
+SOURCES/qemu-ga-win-102.10.0-0.el8_5.noarch.rpm
+SOURCES/virtio-win-1.9.24-bin-for-rpm.tar.gz
+SOURCES/virtio-win-gt-x64.msi
