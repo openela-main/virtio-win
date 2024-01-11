@@ -1,0 +1,7 @@
+d17fabbadda2c2e60d8784cadb44de782145a682bcc4b6fe180a8921f7aa1599 SOURCES/mingw-qemu-ga-win-102.10.0-0.el8_5.src.rpm
+6315810cd03045d04cdebdea8d01a64d361f50dee17ef315d70975c791bf1570 SOURCES/qemu-ga-win-102.10.0-0.el8_5.noarch.rpm
+63647db5186d5d8956fb7d655177a74723a269a4fbb58a941591ebf1508d107a SOURCES/virtio-win-1.9.24-bin-for-rpm.tar.gz
+0d9714a8f45bf8dbff00138caa409dc5cd827a077022a727977ec808994bc7a0 SOURCES/virtio-win-gt-x64.msi
+ba5888cc9f49e673697b35a802bae512e36df9df0727e1a422d8d34486add5f0 SOURCES/virtio-win-gt-x86.msi
+58863c3f08f6a3f90ab8cf29a5f05e919a3ba25e574154f348f456921154b423 SOURCES/virtio-win-guest-tools.exe
+bf03bc879de7ad8f7c86ef4ee01ccf38f09c964dfedc324d7aaa1a3e4e42ac53 SOURCES/virtio-win-installer-1.9.19-11-sources.zip
