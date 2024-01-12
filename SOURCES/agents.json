@@ -2,12 +2,12 @@
   "agents": [
     {
       "arch": "x86",
-      "agent_version": "106.0.0-1",
+      "agent_version": "106.0.1-1",
       "name": "Red Hat QEMU guest agent"
     },
     {
       "arch": "amd64",
-      "agent_version": "106.0.0-1",
+      "agent_version": "106.0.1-1",
       "name": "Red Hat QEMU guest agent"
     },
     {

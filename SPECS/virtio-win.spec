@@ -8,36 +8,23 @@
 # If you make any changes to this file that affect the RPM content (but not
 # version numbers or changelogs, etc), submit a patch to the upstream spec.
 
-%global virtio_win_prewhql_build virtio-win-prewhql-0.1-236
-%global qemu_ga_win_build qemu-ga-win-106.0.0-1.el9
+%global virtio_win_prewhql_build virtio-win-prewhql-0.1-240
+%global qemu_ga_win_build qemu-ga-win-106.0.1-1.el9
 %global qxl_build qxl-win-unsigned-0.1-24
 %global spice_vdagent_build 0.10.0-5.el8
 %global qxlwddm_build spice-qxl-wddm-dod-0.21-2.el8
 
-%global windows_installer_version -1.9.34-0
+%global windows_installer_version -1.9.35-0
 %global winfsp_version -1.12.22339
 
 Summary: VirtIO para-virtualized drivers for Windows(R)
 Name: virtio-win
-Version: 1.9.34
+Version: 1.9.35
 Release: 0%{?dist}
 Group: Applications/System
+License: Apache-2.0 AND BSD-3-Clause AND GPL-2.0-only AND GPL-2.0-or-later
 URL: http://www.redhat.com/
 BuildArch: noarch
-
-%if 0%{?rhel}
-# RHEL RPM ships WHQL signed drivers, which are under a proprietary license
-# qemu-ga builds are GPLv2
-License: BSD-3-Clause and Apache-2.0 and GPLv2
-%else
-# virtio-win drivers are licensed under the BSD license, qxldod under Apache-2.0,
-# everything else is GPLv2
-# virtio-win: https://github.com/virtio-win/kvm-guest-drivers-windows/blob/master/LICENSE
-# qxl: http://cgit.freedesktop.org/spice/win32/qxl/tree/xddm/COPYING
-# qxldod: https://github.com/vrozenfe/qxl-dod/blob/master/LICENSE
-# qemu-ga: http://git.qemu.org/?p=qemu.git;a=blob;f=COPYING
-License: BSD and Apache and GPLv2
-%endif
 
 # Already built/ files
 Source1: %{name}-%{version}-bin-for-rpm.tar.gz
@@ -286,13 +273,13 @@ add_link _servers_amd64.vfd
 %endif
 
 %changelog
-* Fri May 26 2023 Vadim Rozenfeld <vrozenfe@redhat.com> - 1.9.34-0.el9
-- Update installer 1.9.34.0 with the latest agents RHEL-9.2.0.z
-- Resolves: rhbz#2203207
+* Sun Aug 27 2023 Vadim Rozenfeld <vrozenfe@redhat.com>
+- Update installer 1.9.35.0 with the latest agents RHEL-9.3.0
+- Related: #420
 
-* Sun Mar 5 2023 Vadim Rozenfeld <vrozenfe@redhat.com> - 1.9.33-0.el9
-- Update installer 1.9.33.0 with the latest agents RHEL-9.2.0
-- Resolves: rhbz#2123350
+* Sat Jul 10 2023 Vadim Rozenfeld <vrozenfe@redhat.com>
+- Update installer 1.9.34.0 with the latest agents RHEL-9.3.0
+- Related: #420
 
 * Tue Aug 10 2021 Mohan Boddu <mboddu@redhat.com>
 - Rebuilt for IMA sigs, glibc 2.34, aarch64 flags
