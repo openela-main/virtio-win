@@ -8,18 +8,18 @@
 # If you make any changes to this file that affect the RPM content (but not
 # version numbers or changelogs, etc), submit a patch to the upstream spec.
 
-%global virtio_win_prewhql_build virtio-win-prewhql-0.1-240
+%global virtio_win_prewhql_build virtio-win-prewhql-0.1-242
 %global qemu_ga_win_build qemu-ga-win-106.0.1-1.el9
 %global qxl_build qxl-win-unsigned-0.1-24
 %global spice_vdagent_build 0.10.0-5.el8
 %global qxlwddm_build spice-qxl-wddm-dod-0.21-2.el8
 
-%global windows_installer_version -1.9.35-0
+%global windows_installer_version -1.9.36-0
 %global winfsp_version -1.12.22339
 
 Summary: VirtIO para-virtualized drivers for Windows(R)
 Name: virtio-win
-Version: 1.9.35
+Version: 1.9.36
 Release: 0%{?dist}
 Group: Applications/System
 License: Apache-2.0 AND BSD-3-Clause AND GPL-2.0-only AND GPL-2.0-or-later
@@ -273,6 +273,10 @@ add_link _servers_amd64.vfd
 %endif
 
 %changelog
+* Sun Dec 10 2023 Vadim Rozenfeld <vrozenfe@redhat.com>
+- Update installer 1.9.36.0 with the latest agents RHEL-9.3.0.Z
+- Related: #18403
+
 * Sun Aug 27 2023 Vadim Rozenfeld <vrozenfe@redhat.com>
 - Update installer 1.9.35.0 with the latest agents RHEL-9.3.0
 - Related: #420

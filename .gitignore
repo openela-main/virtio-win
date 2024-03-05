@@ -1,7 +1,7 @@
-SOURCES/virtio-win-1.9.35-bin-for-rpm.tar.gz
-SOURCES/virtio-win-gt-x64.msi
-SOURCES/virtio-win-gt-x86.msi
 SOURCES/virtio-win-guest-tools.exe
 SOURCES/winfsp-1.12.22339-sources.zip
 SOURCES/mingw-qemu-ga-win-106.0.1-1.el9.src.rpm
 SOURCES/qemu-ga-win-106.0.1-1.el9.noarch.rpm
+SOURCES/virtio-win-1.9.36-bin-for-rpm.tar.gz
+SOURCES/virtio-win-gt-x64.msi
+SOURCES/virtio-win-gt-x86.msi
