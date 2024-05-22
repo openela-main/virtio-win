@@ -36,7 +36,7 @@
       <file>netkvm.cat</file>
       <file>netkvm.inf</file>
       <file>netkvm.sys</file>
-      <file>netkvmco.dll</file>
+      <file>netkvmco.exe</file>
       <device id="http://pcisig.com/pci/1af4/1000"/> 
       <device id="http://pcisig.com/pci/1af4/1041"/> 
 
@@ -44,8 +44,9 @@
       <file>pvpanic.inf</file>
       <file>pvpanic.sys</file>
 
-      <file>qemufwcfg.cat</file>
-      <file>qemufwcfg.inf</file>
+      <file>fwcfg64.cat</file>
+      <file>fwcfg64.inf</file>
+      <file>fwcfg64.sys</file>
 
       <file>qemupciserial.cat</file>
       <file>qemupciserial.inf</file>

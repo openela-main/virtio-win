@@ -8,37 +8,25 @@
 # If you make any changes to this file that affect the RPM content (but not
 # version numbers or changelogs, etc), submit a patch to the upstream spec.
 
-%global virtio_win_prewhql_build virtio-win-prewhql-0.1-215
-%global qemu_ga_win_build qemu-ga-win-102.10.0-0.el8_5
+%global virtio_win_prewhql_build virtio-win-prewhql-0.1-248
+%global qemu_ga_win_build qemu-ga-win-107.0.1-1.el9
 %global qxl_build qxl-win-unsigned-0.1-24
 %global spice_vdagent_build 0.10.0-5.el8
 %global qxlwddm_build spice-qxl-wddm-dod-0.21-2.el8
 
-%global windows_installer_version -1.9.19-11
+%global windows_installer_version -1.9.39-0
+%global winfsp_version -2.0.23075
 
 Summary: VirtIO para-virtualized drivers for Windows(R)
 Name: virtio-win
-Version: 1.9.24
-Release: 2%{?dist}
+Version: 1.9.39
+Release: 0%{?dist}
 Group: Applications/System
+License: Apache-2.0 AND BSD-3-Clause AND GPL-2.0-only AND GPL-2.0-or-later
 URL: http://www.redhat.com/
 BuildArch: noarch
 
-%if 0%{?rhel}
-# RHEL RPM ships WHQL signed drivers, which are under a proprietary license
-# qemu-ga builds are GPLv2
-License: Red Hat Proprietary and BSD-3-Clause and Apache and GPLv2
-%else
-# virtio-win drivers are licensed under the BSD license, qxldod under Apache,
-# everything else is GPLv2
-# virtio-win: https://github.com/virtio-win/kvm-guest-drivers-windows/blob/master/LICENSE
-# qxl: http://cgit.freedesktop.org/spice/win32/qxl/tree/xddm/COPYING
-# qxldod: https://github.com/vrozenfe/qxl-dod/blob/master/LICENSE
-# qemu-ga: http://git.qemu.org/?p=qemu.git;a=blob;f=COPYING
-License: BSD and Apache and GPLv2
-%endif
-
-# Already built files
+# Already built/ files
 Source1: %{name}-%{version}-bin-for-rpm.tar.gz
 Source2: %{qemu_ga_win_build}.noarch.rpm
 
@@ -51,6 +39,8 @@ Source7: %{qxlwddm_build}.noarch.rpm
 Source8: spice-vdagent-win-%{spice_vdagent_build}.src.rpm
 Source9: spice-vdagent-win-x64-%{spice_vdagent_build}.noarch.rpm
 Source10: spice-vdagent-win-x86-%{spice_vdagent_build}.noarch.rpm
+Source11: winfsp%{winfsp_version}-sources.zip
+
 
 Source20: virtio-win-guest-tools.exe
 Source21: virtio-win-gt-x86.msi
@@ -60,6 +50,7 @@ Source23: virtio-win-guest-tools-installer-%{version}.tar.gz
 %else
 Source23: virtio-win-installer%{windows_installer_version}-sources.zip
 %endif
+Source24: winfsp%{winfsp_version}.msi
 
 %if 0%{?rhel}
 Source70: virtio-win-pre-installable-drivers-win-7.xml
@@ -116,6 +107,7 @@ popd
 %{__cp} %{SOURCE20} iso-content/
 %{__cp} %{SOURCE21} iso-content/
 %{__cp} %{SOURCE22} iso-content/
+%{__cp} %{SOURCE24} iso-content/
 
 
 %if 0%{?rhel} > 7
@@ -148,6 +140,8 @@ pushd iso-content
     -o ../media/%{name}-%{version}.iso \
     -r -iso-level 4 \
     -input-charset iso8859-1 \
+    -allow-lowercase \
+    -relaxed-filenames \
     -V "%{name}-%{version}" .
 popd
 
@@ -214,7 +208,7 @@ add_link _servers_amd64.vfd
 %{__install} -p -m0644 iso-content/virtio-win-guest-tools.exe %{buildroot}%{_datadir}/%{name}/installer/
 %{__install} -p -m0644 iso-content/virtio-win-gt-x86.msi %{buildroot}%{_datadir}/%{name}/installer/
 %{__install} -p -m0644 iso-content/virtio-win-gt-x64.msi  %{buildroot}%{_datadir}/%{name}/installer/
-
+%{__install} -p -m0644 iso-content/winfsp%{winfsp_version}.msi %{buildroot}%{_datadir}/%{name}/installer/
 
 %files
 %doc iso-content/virtio-win_license.txt
@@ -245,6 +239,7 @@ add_link _servers_amd64.vfd
 %{_datadir}/%{name}/drivers/by-driver/sriov
 %{_datadir}/%{name}/drivers/by-driver/qxldod
 %{_datadir}/%{name}/drivers/by-driver/viogpudo
+%{_datadir}/%{name}/drivers/by-driver/fwcfg
 %exclude %{_datadir}/%{name}/drivers/by-driver/virtio-win_license.txt
 %if 0%{?fedora}
 %{_datadir}/%{name}/drivers/by-driver/smbus
@@ -278,61 +273,57 @@ add_link _servers_amd64.vfd
 %endif
 
 %changelog
-* Fri Jan 14 2022 Vadim Rozenfeld <vrozenfe@redhat.com> - 1.9.24-2.el8
-- Update installer to 1.0.19.11
-- Resolves: rhbz#2033400
+* Mon Mar 11 2024 Vadim Rozenfeld <vrozenfe@redhat.com>
+- Update installer 1.9.39.0 with the latest agents RHEL-8.10.0
+- Related: #21536
 
-* Thu Jan 13 2022 Vadim Rozenfeld <vrozenfe@redhat.com> - 1.9.22-4.el8
-- Update installer to 1.0.19.10
-- Resolves: rhbz#2033400
+* Thu Mar  7 2024 Vadim Rozenfeld <vrozenfe@redhat.com>
+- Update installer 1.9.38.0 with the latest agents RHEL-9.4.0
+- Related: #18190
 
-* Sat Jan 08 2022 Vadim Rozenfeld <vrozenfe@redhat.com> - 1.9.22-2.el8
-- Update installer to 1.0.19.5
-- Resolves: rhbz#2033400
+* Tue Mar  5 2024 Vadim Rozenfeld <vrozenfe@redhat.com>
+- Update installer 1.9.37.0 with the latest agents RHEL-9.4.0
+- Related: #18190
 
-* Fri Jan 07 2022 Vadim Rozenfeld <vrozenfe@redhat.com> - 1.9.22-1.el8
-- Update installer to 1.0.19.5
-- Resolves: rhbz#2033400
+* Sun Dec 10 2023 Vadim Rozenfeld <vrozenfe@redhat.com>
+- Update installer 1.9.36.0 with the latest agents RHEL-9.3.0.Z
+- Related: #18403
 
-* Wed Dec 29 2021 Vadim Rozenfeld <vrozenfe@redhat.com> - 1.9.21-1.el8
-- Update installer to 1.0.19.4
-- Resolves: rhbz#2033400
+* Sun Aug 27 2023 Vadim Rozenfeld <vrozenfe@redhat.com>
+- Update installer 1.9.35.0 with the latest agents RHEL-9.3.0
+- Related: #420
 
-* Sun Dec 19 2021 Vadim Rozenfeld <vrozenfe@redhat.com> - 1.9.20-3.el8
-- Update installer to 1.0.19.2
-- Resolves: rhbz#2033400
+* Mon Jul 10 2023 Vadim Rozenfeld <vrozenfe@redhat.com>
+- Update installer 1.9.34.0 with the latest agents RHEL-9.3.0
+- Related: #420
 
-* Tue Dec 14 2021 Vadim Rozenfeld <vrozenfe@redhat.com> - 1.9.20-2.el8
-- Update installer to 1.0.19.1
-- Resolves: rhbz#2033400
+* Tue Aug 10 2021 Mohan Boddu <mboddu@redhat.com>
+- Rebuilt for IMA sigs, glibc 2.34, aarch64 flags
+  Related: rhbz#1991688
 
-* Sun Sep 12 2021 Vadim Rozenfeld <vrozenfe@redhat.com> - 1.9.19-1.el8
-- update to build 208
-- Resolves: rhbz#1996949
+* Fri Apr 16 2021 Mohan Boddu <mboddu@redhat.com>
+- Rebuilt for RHEL 9 BETA on Apr 15th 2021. Related: rhbz#1947937
 
-* Sun Sep 12 2021 Vadim Rozenfeld <vrozenfe@redhat.com> - 1.9.18-4.el8
-- update to build 208
-- Resolves: rhbz#1996949
+* Wed Jan 20 2021 Vadim Rozenfeld <vrozenfe@redhat.com> - 1.9.15-2.el9
+- This is a plain copy of the virtio-win package released in RHEL-8.3.1 for RHEL-9.0.0
+- Resolves: rhbz#1916284
 
-* Wed Sep 8 2021 Vadim Rozenfeld <vrozenfe@redhat.com> - 1.9.18-3.el8
-- update installer to 1.9.18.3
-- Resolves: rhbz#1996949
+* Tue Jan 19 2021 Vadim Rozenfeld <vrozenfe@redhat.com> - 1.9.15-1.el9
+- This is a plain copy of the virtio-win package released in RHEL-8.3.1 for RHEL-9.0.0
+- Resolves: rhbz#1916284
 
-* Fri Sep 3 2021 Vadim Rozenfeld <vrozenfe@redhat.com> - 1.9.18-2.el8
-- update installer to 1.9.18.2
-- Resolves: rhbz#1996949
+* Tue Jan 5 2021 Vadim Rozenfeld <vrozenfe@redhat.com> - 1.9.15-0.el8
+- Update to build 191 
+- Update installer 1.9.15.1 with the latest agents and drivers
+- Resolves: rhbz#1911903
 
-* Wed Sep 1 2021 Vadim Rozenfeld <vrozenfe@redhat.com> - 1.9.18-1.el8
-- Update installer to 1.0.18.1
-- Resolves: rhbz#1996949
+* Fri Sep 25 2020 Vadim Rozenfeld <vrozenfe@redhat.com> - 1.9.14-4.el8
+- Update installer 1.9.14.2 with the latest agents
+- Resolves: rhbz#1746667
 
-* Tue Feb 9 2021 Vadim Rozenfeld <vrozenfe@redhat.com> - 1.9.16-1.el8
-- Add qxldod to xml pci devices database
-- Resolves: rhbz#1902635
-
-* Mon Feb 8 2021 Vadim Rozenfeld <vrozenfe@redhat.com> - 1.9.16-0.el8
-- Add qxldod to virtio-win iso
-- Resolves: rhbz#1902635
+* Wed Sep 23 2020 Vadim Rozenfeld <vrozenfe@redhat.com> - 1.9.14-3.el8
+- Update installer 1.9.14.2
+- Resolves: rhbz#1746667
 
 * Mon Sep 21 2020 Vadim Rozenfeld <vrozenfe@redhat.com> - 1.9.14-2.el8
 - Update installer 1.9.14.1

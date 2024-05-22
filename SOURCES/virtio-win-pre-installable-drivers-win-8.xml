@@ -49,6 +49,10 @@
       <file>pvpanic.inf</file>
       <file>pvpanic.sys</file>
 
+      <file>fwcfg64.cat</file>
+      <file>fwcfg64.inf</file>
+      <file>fwcfg64.sys</file>
+
       <file>qemupciserial.cat</file>
       <file>qemupciserial.inf</file>
 
@@ -88,6 +92,11 @@
       <file>viofs.inf</file>
       <file>viofs.sys</file>
       <device id="http://pcisig.com/pci/1af4/105a"/>
+
+      <file>viogpudo.cat</file>
+      <file>viogpudo.inf</file>
+      <file>viogpudo.sys</file>
+      <device id="http://pcisig.com/pci/1af4/1050"/>
     </driver>
 
     <driver signed="true" pre-installable="true" location="file:///usr/share/virtio-win/drivers/by-os/amd64/w8/" arch="x86_64">
@@ -110,6 +119,10 @@
       <file>pvpanic.inf</file>
       <file>pvpanic.sys</file>
 
+      <file>fwcfg64.cat</file>
+      <file>fwcfg64.inf</file>
+      <file>fwcfg64.sys</file>
+
       <file>qemupciserial.cat</file>
       <file>qemupciserial.inf</file>
 
@@ -149,6 +162,11 @@
       <file>viofs.inf</file>
       <file>viofs.sys</file>
       <device id="http://pcisig.com/pci/1af4/105a"/>
+
+      <file>viogpudo.cat</file>
+      <file>viogpudo.inf</file>
+      <file>viogpudo.sys</file>
+      <device id="http://pcisig.com/pci/1af4/1050"/>
     </driver>
   </os>
 </libosinfo>
