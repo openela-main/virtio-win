@@ -8,18 +8,18 @@
 # If you make any changes to this file that affect the RPM content (but not
 # version numbers or changelogs, etc), submit a patch to the upstream spec.
 
-%global virtio_win_prewhql_build virtio-win-prewhql-0.1-257
-%global qemu_ga_win_build qemu-ga-win-108.0.1-1.el9
+%global virtio_win_prewhql_build virtio-win-prewhql-0.1-262
+%global qemu_ga_win_build qemu-ga-win-108.0.2-1.el9
 %global qxl_build qxl-win-unsigned-0.1-24
 %global spice_vdagent_build 0.10.0-5.el8
 %global qxlwddm_build spice-qxl-wddm-dod-0.21-2.el8
 
-%global windows_installer_version -1.9.40-0
+%global windows_installer_version -1.9.43-0
 %global winfsp_version -2.0.23075
 
 Summary: VirtIO para-virtualized drivers for Windows(R)
 Name: virtio-win
-Version: 1.9.40
+Version: 1.9.43
 Release: 0%{?dist}
 Group: Applications/System
 License: Apache-2.0 AND BSD-3-Clause AND GPL-2.0-only AND GPL-2.0-or-later
@@ -59,6 +59,11 @@ Source72: virtio-win-pre-installable-drivers-win-8.1.xml
 Source73: virtio-win-pre-installable-drivers-win-10.xml
 Source74: virtio-win-pre-installable-drivers-win-11.xml
 Source80: agents.json
+Source81: release-drivers-versions.txt
+Source82: CollectSystemInfo.ps1
+Source83: LICENSE
+Source84: README.md
+
 %endif
 
 BuildRequires: /usr/bin/mkisofs
@@ -109,6 +114,14 @@ popd
 %{__cp} %{SOURCE22} iso-content/
 %{__cp} %{SOURCE24} iso-content/
 
+%if 0%{?rhel}
+%{__cp} %{SOURCE81} iso-content/
+mkdir -p iso-content/tools
+mkdir -p iso-content/tools/debug
+%{__cp} %{SOURCE82} iso-content/tools/debug/
+%{__cp} %{SOURCE83} iso-content/tools/debug/
+%{__cp} %{SOURCE84} iso-content/tools/debug/
+%endif
 
 %if 0%{?rhel} > 7
 # Dropping unsupported Windows versions.
@@ -188,6 +201,11 @@ add_link _servers_amd64.vfd
 %if 0%{?rhel}
 %{__cp} %{SOURCE80} %{buildroot}/%{_datadir}/%{name}/
 %{__cp} iso-content/data/*.json %{buildroot}/%{_datadir}/%{name}/
+%{__cp} %{SOURCE81} %{buildroot}/%{_datadir}/%{name}/
+%{__mkdir} -p %{buildroot}/%{_datadir}/%{name}/tools/debug/
+%{__cp} %{SOURCE82} %{buildroot}/%{_datadir}/%{name}/tools/debug/
+%{__cp} %{SOURCE83} %{buildroot}/%{_datadir}/%{name}/tools/debug/
+%{__cp} %{SOURCE84} %{buildroot}/%{_datadir}/%{name}/tools/debug/
 %endif
 
 # Copy the guest agent .msi into final RPM location
@@ -273,7 +291,24 @@ add_link _servers_amd64.vfd
 %{_datadir}/%{name}/*.json
 %endif
 
+%if 0%{?rhel}
+%{_datadir}/%{name}/release-drivers-versions.txt
+%{_datadir}/%{name}/tools/*
+%endif
+
 %changelog
+* Fri Sep 13 2024 Vadim Rozenfeld <vrozenfe@redhat.com>
+- Update installer 1.9.43.0 with the latest agents RHEL-9.5.0
+- Related: #33580
+
+* Wed Aug 28 2024 Vadim Rozenfeld <vrozenfe@redhat.com>
+- Update installer 1.9.42.0 with the latest agents RHEL-9.5.0
+- Related: #33580
+
+* Sun Aug 25 2024 Vadim Rozenfeld <vrozenfe@redhat.com>
+- Update installer 1.9.41.0 with the latest agents RHEL-9.5.0
+- Related: #33580
+
 * Thu May 23 2024 Vadim Rozenfeld <vrozenfe@redhat.com>
 - Update installer 1.9.40.0 with the latest agents RHEL-9.4.0.Z
 - Related: #37139

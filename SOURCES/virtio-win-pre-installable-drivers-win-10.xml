@@ -37,6 +37,7 @@
       <file>netkvm.inf</file>
       <file>netkvm.sys</file>
       <file>netkvmco.exe</file>
+      <file>netkvmp.exe</file>
       <device id="http://pcisig.com/pci/1af4/1000"/> 
       <device id="http://pcisig.com/pci/1af4/1041"/> 
 
@@ -60,7 +61,6 @@
       <file>viorng.cat</file>
       <file>viorng.inf</file>
       <file>viorng.sys</file>
-      <file>viorngci.dll</file>
       <file>viorngum.dll</file>
       <device id="http://pcisig.com/pci/1af4/1005"/> 
       <device id="http://pcisig.com/pci/1af4/1044"/> 
@@ -115,6 +115,7 @@
       <file>netkvm.inf</file>
       <file>netkvm.sys</file>
       <file>netkvmco.exe</file>
+      <file>netkvmp.exe</file>
       <device id="http://pcisig.com/pci/1af4/1000"/> 
       <device id="http://pcisig.com/pci/1af4/1041"/> 
 
@@ -138,7 +139,6 @@
       <file>viorng.cat</file>
       <file>viorng.inf</file>
       <file>viorng.sys</file>
-      <file>viorngci.dll</file>
       <file>viorngum.dll</file>
       <device id="http://pcisig.com/pci/1af4/1005"/> 
       <device id="http://pcisig.com/pci/1af4/1044"/> 

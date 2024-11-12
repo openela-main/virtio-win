@@ -37,6 +37,7 @@
       <file>netkvm.inf</file>
       <file>netkvm.sys</file>
       <file>netkvmco.exe</file>
+      <file>netkvmp.exe</file>
       <device id="http://pcisig.com/pci/1af4/1000"/> 
       <device id="http://pcisig.com/pci/1af4/1041"/> 
 
