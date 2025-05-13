@@ -300,6 +300,10 @@ add_link _servers_amd64.vfd
 %endif
 
 %changelog
+* Tue Apr 22 2025 Vadim Rozenfeld <vrozenfe@redhat.com>
+- Update installer 1.9.46.0 with the latest agents RHEL-9.6.0.z
+- Related: #87520
+
 * Wed Apr 16 2025 Vadim Rozenfeld <vrozenfe@redhat.com>
 - Update installer 1.9.46.0 with the latest agents RHEL-9.4.0.z
 - Related: #87518
