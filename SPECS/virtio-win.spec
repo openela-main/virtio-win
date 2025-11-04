@@ -8,18 +8,18 @@
 # If you make any changes to this file that affect the RPM content (but not
 # version numbers or changelogs, etc), submit a patch to the upstream spec.
 
-%global virtio_win_prewhql_build virtio-win-prewhql-0.1-271
-%global qemu_ga_win_build qemu-ga-win-109.1.0-8.el10
+%global virtio_win_prewhql_build virtio-win-prewhql-0.1-290
+%global qemu_ga_win_build qemu-ga-win-110.0.2-1.el10
 %global qxl_build qxl-win-unsigned-0.1-24
 %global spice_vdagent_build 0.10.0-5.el8
 %global qxlwddm_build spice-qxl-wddm-dod-0.21-2.el8
 
-%global windows_installer_version -1.9.46-0
+%global windows_installer_version -1.9.49-0
 %global winfsp_version -2.0.23075
 
 Summary: VirtIO para-virtualized drivers for Windows(R)
 Name: virtio-win
-Version: 1.9.46
+Version: 1.9.49
 Release: 0%{?dist}
 Group: Applications/System
 License: Apache-2.0 AND BSD-3-Clause AND GPL-2.0-only AND GPL-2.0-or-later
@@ -136,7 +136,6 @@ for srcdir in iso-content rpm-drivers; do
     rm_driver_dir xp
     rm_driver_dir 2k3
     rm_driver_dir 2k8
-    rm_driver_dir smbus
 
     # Old floppy naming
     rm_driver_dir WinXP
@@ -150,7 +149,7 @@ done
 # Generate .iso
 pushd iso-content
 
-#mkdir -p ../media
+mkdir -p ../media
 
 /usr/bin/mkisofs \
     -o ../media/%{name}-%{version}.iso \
@@ -240,8 +239,8 @@ add_link _servers_amd64.vfd
 %{_datadir}/%{name}/spice-vdagent/*.msi
 %{_datadir}/%{name}/qxl-wddm-dod/*.msi
 
-%{_datadir}/%{name}/drivers/i386
-%{_datadir}/%{name}/drivers/amd64
+#%{_datadir}/%{name}/drivers/i386
+#%{_datadir}/%{name}/drivers/amd64
 
 # Add some by-os and by-driver whitelisting, so unintended things don't
 # sneak into the hierarchy
@@ -262,9 +261,10 @@ add_link _servers_amd64.vfd
 %{_datadir}/%{name}/drivers/by-driver/viogpudo
 %{_datadir}/%{name}/drivers/by-driver/viomem
 %{_datadir}/%{name}/drivers/by-driver/fwcfg
+%{_datadir}/%{name}/drivers/by-driver/viosock
 %exclude %{_datadir}/%{name}/drivers/by-driver/virtio-win_license.txt
 %if 0%{?fedora}
-%{_datadir}/%{name}/drivers/by-driver/smbus
+#%{_datadir}/%{name}/drivers/by-driver/smbus
 %endif
 
 %{_datadir}/%{name}/drivers/by-os/i386
@@ -300,6 +300,22 @@ add_link _servers_amd64.vfd
 %endif
 
 %changelog
+* Sun Oct 19 2025 Vadim Rozenfeld <vrozenfe@redhat.com>
+- Update installer 1.9.49.0 with the latest agents RHEL-9.6.z
+- Related: #119050
+
+* Mon Aug 18 2025 Vadim Rozenfeld <vrozenfe@redhat.com>
+- Update installer 1.9.48.0 with the latest agents RHEL-10.1
+- Related: #107451
+
+* Wed Jun 18 2025 Vadim Rozenfeld <vrozenfe@redhat.com>
+- Test build for Konstantin
+- Related: #93431
+
+* Mon May 26 2025 Vadim Rozenfeld <vrozenfe@redhat.com>
+- Update installer 1.9.47.0 with the latest agents RHEL-10.0.z
+- Related: #93431
+
 * Tue Apr 22 2025 Vadim Rozenfeld <vrozenfe@redhat.com>
 - Update installer 1.9.46.0 with the latest agents RHEL-9.6.0.z
 - Related: #87520
