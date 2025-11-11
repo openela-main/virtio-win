@@ -97,11 +97,6 @@
       <file>viogpudo.inf</file>
       <file>viogpudo.sys</file>
       <device id="http://pcisig.com/pci/1af4/1050"/>
-
-      <file>viomem.cat</file>
-      <file>viomem.inf</file>
-      <file>viomem.sys</file>
-      <device id="http://pcisig.com/pci/1af4/1058"/>
     </driver>
 
     <driver signed="true" pre-installable="true" location="file:///usr/share/virtio-win/drivers/by-os/amd64/w10/" arch="x86_64">
@@ -175,6 +170,20 @@
       <file>viogpudo.inf</file>
       <file>viogpudo.sys</file>
       <device id="http://pcisig.com/pci/1af4/1050"/>
+
+      <file>viomem.cat</file>
+      <file>viomem.inf</file>
+      <file>viomem.sys</file>
+      <device id="http://pcisig.com/pci/1af4/1058"/>
+
+      <file>viosock.cat</file>
+      <file>viosock.inf</file>
+      <file>viosock.sys</file>
+      <file>viosocklib_x64.dll</file>
+      <file>viosocklib_x86.dll</file>
+      <file>viosockwspsvc.exe</file>
+      <device id="http://pcisig.com/pci/1af4/1012"/>
+      <device id="http://pcisig.com/pci/1af4/1053"/>
     </driver>
   </os>
 </libosinfo>
