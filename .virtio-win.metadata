@@ -1,6 +1,6 @@
+0d8ad2d49237a2ea9f17667e6a67b9dd81c6f8a5951ebee9d48039448b8dd61f SOURCES/winfsp-2.0.23075-sources.zip
 25fc54bdf4324ece31212f9e1b0993345a16bdf07399a7dedede0c52c682dc50 SOURCES/mingw-qemu-ga-win-110.0.2-1.el10.src.rpm
 026a649912ae2cd20e19eeaf4c90ed0f6917249f2ec520aed324177b2306dc74 SOURCES/qemu-ga-win-110.0.2-1.el10.noarch.rpm
-5a22a937439e8e21f14dc6d8048543dd687e0ad1702f28540fb934af24e33de0 SOURCES/virtio-win-1.9.48-bin-for-rpm.tar.gz
-ec1e8c30c7f4e6fa795b9abf205b2a1e8c1e0ec16a8f66d1ce817e26969ba8a0 SOURCES/virtio-win-gt-x64.msi
-5b699a039a61f3bba7b263b84f5ea3515051618056b0b8dab995d83cc72457ab SOURCES/virtio-win-guest-tools.exe
-0d8ad2d49237a2ea9f17667e6a67b9dd81c6f8a5951ebee9d48039448b8dd61f SOURCES/winfsp-2.0.23075-sources.zip
+f41efd079733a7d5ea3581093ce505d0ef7dd03a1c5c2287350df5388bae9d68 SOURCES/virtio-win-1.9.49-bin-for-rpm.tar.gz
+0d17fa16fa714598bb1ee28f106fb600ca5d9df2a65479c13f0e82bdd1a9e122 SOURCES/virtio-win-gt-x64.msi
+8e144d869e74b39cfdff17ff86501390930322f5d49293441608faa9fbd6bbbc SOURCES/virtio-win-guest-tools.exe

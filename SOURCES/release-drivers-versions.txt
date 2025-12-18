@@ -8,19 +8,19 @@
 |             | 284 |Windows server 2022       |
 |             | 284 |Windows server 2025(26100)|
 |             |     |                          |
-|viostor      | 278 |Windows 10 (22H2)         |
-|             | 284 |Windows 11 (24H2) 26100   |
-|             | 284 |Windows server 2016       |
-|             | 284 |Windows server 2019       |
-|             | 284 |Windows server 2022       |
-|             | 284 |Windows server 2025(26100)|
+|viostor      | 290 |Windows 10 (22H2)         |
+|             | 290 |Windows 11 (24H2) 26100   |
+|             | 290 |Windows server 2016       |
+|             | 290 |Windows server 2019       |
+|             | 290 |Windows server 2022       |
+|             | 290 |Windows server 2025(26100)|
 |             |     |                          |
-|vioscsi      | 278 |Windows 10 (22H2)         |
-|             | 284 |Windows 11 (24H2) 26100   |
-|             | 284 |Windows server 2016       |
-|             | 284 |Windows server 2019       |
-|             | 284 |Windows server 2022       |
-|             | 284 |Windows server 2025(26100)|
+|vioscsi      | 290 |Windows 10 (22H2)         |
+|             | 290 |Windows 11 (24H2) 26100   |
+|             | 290 |Windows server 2016       |
+|             | 290 |Windows server 2019       |
+|             | 290 |Windows server 2022       |
+|             | 290 |Windows server 2025(26100)|
 |             |     |                          |
 |viorng       | 271 |Windows 10 (22H2)         |
 |             | 284 |Windows 11 (24H2) 26100   |
