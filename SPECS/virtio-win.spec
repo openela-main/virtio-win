@@ -8,18 +8,15 @@
 # If you make any changes to this file that affect the RPM content (but not
 # version numbers or changelogs, etc), submit a patch to the upstream spec.
 
-%global virtio_win_prewhql_build virtio-win-prewhql-0.1-290
-%global qemu_ga_win_build qemu-ga-win-110.0.2-1.el10
-%global qxl_build qxl-win-unsigned-0.1-24
-%global spice_vdagent_build 0.10.0-5.el8
-%global qxlwddm_build spice-qxl-wddm-dod-0.21-2.el8
+%global virtio_win_prewhql_build virtio-win-prewhql-0.1-295
+%global qemu_ga_win_build qemu-ga-win-110.1.0-1.el10
 
-%global windows_installer_version -1.9.49-0
+%global windows_installer_version -1.9.52-0
 %global winfsp_version -2.0.23075
 
 Summary: VirtIO para-virtualized drivers for Windows(R)
 Name: virtio-win
-Version: 1.9.49
+Version: 1.9.52
 Release: 0%{?dist}
 Group: Applications/System
 License: Apache-2.0 AND BSD-3-Clause AND GPL-2.0-only AND GPL-2.0-or-later
@@ -33,14 +30,7 @@ Source2: %{qemu_ga_win_build}.noarch.rpm
 # Source files shipped in the srpm
 Source3: %{virtio_win_prewhql_build}-sources.zip
 Source4: mingw-%{qemu_ga_win_build}.src.rpm
-Source5: %{qxl_build}-sources.zip
-Source6: %{qxlwddm_build}.src.rpm
-Source7: %{qxlwddm_build}.noarch.rpm
-Source8: spice-vdagent-win-%{spice_vdagent_build}.src.rpm
-Source9: spice-vdagent-win-x64-%{spice_vdagent_build}.noarch.rpm
-Source10: spice-vdagent-win-x86-%{spice_vdagent_build}.noarch.rpm
 Source11: winfsp%{winfsp_version}-sources.zip
-
 
 Source20: virtio-win-guest-tools.exe
 Source21: virtio-win-gt-x86.msi
@@ -63,6 +53,7 @@ Source81: release-drivers-versions.txt
 Source82: CollectSystemInfo.ps1
 Source83: LICENSE
 Source84: README.md
+Source85: CollectSystemInfo-WinPE.ps1
 
 %endif
 
@@ -86,28 +77,6 @@ popd
 %{__mv} %{qemu_ga_win_build}/usr/i686-w64-mingw32/sys-root/mingw/bin/qemu-ga-i386.msi iso-content/guest-agent/
 %{__mv} %{qemu_ga_win_build}/usr/x86_64-w64-mingw32/sys-root/mingw/bin/qemu-ga-x86_64.msi iso-content/guest-agent/
 
-
-# Extract spice-vdagent RPMs
-mkdir -p iso-content/spice-vdagent
-mkdir -p %{spice_vdagent_build}
-pushd %{spice_vdagent_build}/ && rpm2cpio %{SOURCE9} | cpio -idmv
-popd
-pushd %{spice_vdagent_build}/ && rpm2cpio %{SOURCE10} | cpio -idmv
-popd
-
-%{__mv} %{spice_vdagent_build}/usr/share/spice/spice-vdagent-x64-*.msi iso-content/spice-vdagent/spice-vdagent-x64.msi
-%{__mv} %{spice_vdagent_build}/usr/share/spice/spice-vdagent-x86-*.msi iso-content/spice-vdagent/spice-vdagent-x86.msi
-
-# Extract qxlwddm drivers
-mkdir -p iso-content/qxl-wddm-dod
-mkdir -p %{qxl_wddm_dod}
-pushd %{qxl_wddm_dod}/ && rpm2cpio %{SOURCE7} | cpio -idmv
-popd
-
-%{__mv} %{qxl_wddm_dod}/usr/share/spice/QxlWddmDod_*_x64.msi iso-content/qxl-wddm-dod/QxlWddmDod_x64.msi
-%{__mv} %{qxl_wddm_dod}/usr/share/spice/QxlWddmDod_*_x86.msi iso-content/qxl-wddm-dod/QxlWddmDod_x86.msi
-
-
 # Move virtio-win MSIs into place
 %{__cp} %{SOURCE20} iso-content/
 %{__cp} %{SOURCE21} iso-content/
@@ -121,6 +90,7 @@ mkdir -p iso-content/tools/debug
 %{__cp} %{SOURCE82} iso-content/tools/debug/
 %{__cp} %{SOURCE83} iso-content/tools/debug/
 %{__cp} %{SOURCE84} iso-content/tools/debug/
+%{__cp} %{SOURCE85} iso-content/tools/debug/
 %endif
 
 %if 0%{?rhel} > 7
@@ -208,20 +178,13 @@ add_link _servers_amd64.vfd
 %{__cp} %{SOURCE82} %{buildroot}/%{_datadir}/%{name}/tools/debug/
 %{__cp} %{SOURCE83} %{buildroot}/%{_datadir}/%{name}/tools/debug/
 %{__cp} %{SOURCE84} %{buildroot}/%{_datadir}/%{name}/tools/debug/
+%{__cp} %{SOURCE85} %{buildroot}/%{_datadir}/%{name}/tools/debug/
 %endif
 
 # Copy the guest agent .msi into final RPM location
 %{__mkdir} -p %{buildroot}%{_datadir}/%{name}/guest-agent/
 %{__install} -p -m0644 iso-content/guest-agent/qemu-ga-i386.msi %{buildroot}%{_datadir}/%{name}/guest-agent/qemu-ga-i386.msi
 %{__install} -p -m0644 iso-content/guest-agent/qemu-ga-x86_64.msi  %{buildroot}%{_datadir}/%{name}/guest-agent/qemu-ga-x86_64.msi
-
-%{__mkdir} -p %{buildroot}%{_datadir}/%{name}/spice-vdagent/
-%{__install} -p -m0644 iso-content/spice-vdagent/spice-vdagent-x86.msi %{buildroot}%{_datadir}/%{name}/spice-vdagent/spice-vdagent-x86.msi
-%{__install} -p -m0644 iso-content/spice-vdagent/spice-vdagent-x64.msi  %{buildroot}%{_datadir}/%{name}/spice-vdagent/spice-vdagent-x64.msi
-
-%{__mkdir} -p %{buildroot}%{_datadir}/%{name}/qxl-wddm-dod/
-%{__install} -p -m0644 iso-content/qxl-wddm-dod/QxlWddmDod_x86.msi %{buildroot}%{_datadir}/%{name}/qxl-wddm-dod/QxlWddmDod_x86.msi
-%{__install} -p -m0644 iso-content/qxl-wddm-dod/QxlWddmDod_x64.msi  %{buildroot}%{_datadir}/%{name}/qxl-wddm-dod/QxlWddmDod_x64.msi
 
 # Copy virtio-win install .msi into final RPM location
 %{__mkdir} -p %{buildroot}%{_datadir}/%{name}/installer/
@@ -236,8 +199,6 @@ add_link _servers_amd64.vfd
 %{_datadir}/%{name}/%{name}-%{version}.iso
 %{_datadir}/%{name}/%{name}.iso
 %{_datadir}/%{name}/guest-agent/*.msi
-%{_datadir}/%{name}/spice-vdagent/*.msi
-%{_datadir}/%{name}/qxl-wddm-dod/*.msi
 
 #%{_datadir}/%{name}/drivers/i386
 #%{_datadir}/%{name}/drivers/amd64
@@ -249,7 +210,6 @@ add_link _servers_amd64.vfd
 %{_datadir}/%{name}/drivers/by-driver/pvpanic
 %{_datadir}/%{name}/drivers/by-driver/qemufwcfg
 %{_datadir}/%{name}/drivers/by-driver/qemupciserial
-%{_datadir}/%{name}/drivers/by-driver/qxl
 %{_datadir}/%{name}/drivers/by-driver/vioinput
 %{_datadir}/%{name}/drivers/by-driver/viorng
 %{_datadir}/%{name}/drivers/by-driver/vioscsi
@@ -257,7 +217,6 @@ add_link _servers_amd64.vfd
 %{_datadir}/%{name}/drivers/by-driver/viostor
 %{_datadir}/%{name}/drivers/by-driver/viofs
 %{_datadir}/%{name}/drivers/by-driver/sriov
-%{_datadir}/%{name}/drivers/by-driver/qxldod
 %{_datadir}/%{name}/drivers/by-driver/viogpudo
 %{_datadir}/%{name}/drivers/by-driver/viomem
 %{_datadir}/%{name}/drivers/by-driver/fwcfg
@@ -300,6 +259,42 @@ add_link _servers_amd64.vfd
 %endif
 
 %changelog
+* Wed Feb 4 2026 Vadim Rozenfeld <vrozenfe@redhat.com>
+- Update installer 1.9.52.0 with the latest agents RHEL-10.1.z
+- Related: #RHEL-146126
+
+* Wed Feb 4 2026 Vadim Rozenfeld <vrozenfe@redhat.com>
+- Update installer 1.9.52.0 with the latest agents RHEL-9.6.z
+- Related: #146127
+
+* Wed Feb 4 2025 Vadim Rozenfeld <vrozenfe@redhat.com>
+- Update installer 1.9.52.0 with the latest agents RHEL-10.2
+- Related: #145605
+
+* Wed Feb 4 2026 Vadim Rozenfeld <vrozenfe@redhat.com>
+- Update installer 1.9.51.0 with the latest agents RHEL-10.1.z
+- Related: #RHEL-146126
+
+* Wed Feb 4 2026 Vadim Rozenfeld <vrozenfe@redhat.com>
+- Update installer 1.9.51.0 with the latest agents RHEL-9.6.z
+- Related: #146127
+
+* Tue Feb 2 2025 Vadim Rozenfeld <vrozenfe@redhat.com>
+- Update installer 1.9.51.0 with the latest agents RHEL-10.2
+- Related: #145605
+
+* Tue Nov 25 2025 Vadim Rozenfeld <vrozenfe@redhat.com>
+- Update installer 1.9.50.0 with the latest agents RHEL-9.6.z
+- Related: #119050
+
+* Thu Nov 20 2025 Vadim Rozenfeld <vrozenfe@redhat.com>
+- Update installer 1.9.50.0 with the latest agents RHEL-9.4.z
+- Related: #126976
+
+* Fri Nov 7 2025 Vadim Rozenfeld <vrozenfe@redhat.com>
+- Update installer 1.9.49.0 with the latest agents RHEL-9.4.z
+- Related: #126976
+
 * Fri Oct 24 2025 Vadim Rozenfeld <vrozenfe@redhat.com>
 - Update installer 1.9.49.0 with the latest agents RHEL-10.1.z
 - Related: #119049
