@@ -88,11 +88,6 @@
       <file>viofs.sys</file>
       <device id="http://pcisig.com/pci/1af4/105a"/>
 
-      <file>qxldod.cat</file>
-      <file>qxldod.inf</file>
-      <file>qxldod.sys</file>
-      <device id="http://pcisig.com/pci/1b36/0100"/>
-
       <file>viogpudo.cat</file>
       <file>viogpudo.inf</file>
       <file>viogpudo.sys</file>
@@ -160,11 +155,6 @@
       <file>viofs.inf</file>
       <file>viofs.sys</file>
       <device id="http://pcisig.com/pci/1af4/105a"/>
-
-      <file>qxldod.cat</file>
-      <file>qxldod.inf</file>
-      <file>qxldod.sys</file>
-      <device id="http://pcisig.com/pci/1b36/0100"/>
 
       <file>viogpudo.cat</file>
       <file>viogpudo.inf</file>
