@@ -1,6 +1,6 @@
+SOURCES/mingw-qemu-ga-win-110.2.2-1.el10.src.rpm
+SOURCES/qemu-ga-win-110.2.2-1.el10.noarch.rpm
+SOURCES/virtio-win-1.9.58-bin-for-rpm.tar.gz
+SOURCES/virtio-win-gt-x64.msi
 SOURCES/virtio-win-guest-tools.exe
 SOURCES/winfsp-2.0.23075-sources.zip
-SOURCES/mingw-qemu-ga-win-110.2.1-1.el10.src.rpm
-SOURCES/qemu-ga-win-110.2.1-1.el10.noarch.rpm
-SOURCES/virtio-win-1.9.57-bin-for-rpm.tar.gz
-SOURCES/virtio-win-gt-x64.msi
