@@ -8,15 +8,15 @@
 # If you make any changes to this file that affect the RPM content (but not
 # version numbers or changelogs, etc), submit a patch to the upstream spec.
 
-%global virtio_win_prewhql_build virtio-win-prewhql-0.1-297
-%global qemu_ga_win_build qemu-ga-win-110.2.1-1.el10
+%global virtio_win_prewhql_build virtio-win-prewhql-0.1-300
+%global qemu_ga_win_build qemu-ga-win-110.2.2-1.el10
 
-%global windows_installer_version -1.9.57-0
+%global windows_installer_version -1.9.58-0
 %global winfsp_version -2.0.23075
 
 Summary: VirtIO para-virtualized drivers for Windows(R)
 Name: virtio-win
-Version: 1.9.57
+Version: 1.9.58
 Release: 0%{?dist}
 Group: Applications/System
 License: Apache-2.0 AND BSD-3-Clause AND GPL-2.0-only AND GPL-2.0-or-later
@@ -221,11 +221,7 @@ add_link _servers_amd64.vfd
 %{_datadir}/%{name}/drivers/by-driver/viomem
 %{_datadir}/%{name}/drivers/by-driver/fwcfg
 %{_datadir}/%{name}/drivers/by-driver/viosock
-%{_datadir}/%{name}/drivers/by-driver/osinfo-xml
 %exclude %{_datadir}/%{name}/drivers/by-driver/virtio-win_license.txt
-%if 0%{?fedora}
-# %{_datadir}/%{name}/drivers/by-driver/smbus
-%endif
 
 %{_datadir}/%{name}/drivers/by-os/i386
 %{_datadir}/%{name}/drivers/by-os/amd64
@@ -260,6 +256,18 @@ add_link _servers_amd64.vfd
 %endif
 
 %changelog
+* Thu Jul 30 2026 Vadim Rozenfeld <vrozenfe@redhat.com>
+- Update installer 1.9.58.0 with the latest agents RHEL-9.4.z
+- Related: #219753
+
+* Fri Jul 17 2026 Vadim Rozenfeld <vrozenfe@redhat.com>
+- Update installer 1.9.58.0 with the latest agents RHEL-9.8.z
+- Related: #211928
+
+* Fri Jul 17 2026 Vadim Rozenfeld <vrozenfe@redhat.com>
+- Update installer 1.9.58.0 with the latest agents RHEL-9.6.z
+- Related: #211927
+
 * Fri May 22 2026 Vadim Rozenfeld <vrozenfe@redhat.com>
 - Update installer 1.9.57.0 with the latest agents RHEL-9.8.0.z
 - Related: #178482
