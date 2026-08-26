@@ -256,10 +256,6 @@ add_link _servers_amd64.vfd
 %endif
 
 %changelog
-* Thu Jul 30 2026 Vadim Rozenfeld <vrozenfe@redhat.com>
-- Update installer 1.9.58.0 with the latest agents RHEL-9.4.z
-- Related: #219753
-
 * Fri Jul 17 2026 Vadim Rozenfeld <vrozenfe@redhat.com>
 - Update installer 1.9.58.0 with the latest agents RHEL-9.8.z
 - Related: #211928
