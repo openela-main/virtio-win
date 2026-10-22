@@ -8,15 +8,15 @@
 # If you make any changes to this file that affect the RPM content (but not
 # version numbers or changelogs, etc), submit a patch to the upstream spec.
 
-%global virtio_win_prewhql_build virtio-win-prewhql-0.1-300
-%global qemu_ga_win_build qemu-ga-win-110.2.2-1.el10
+%global virtio_win_prewhql_build virtio-win-prewhql-0.1-303
+%global qemu_ga_win_build qemu-ga-win-110.2.3-2.el10
 
-%global windows_installer_version -1.9.58-0
+%global windows_installer_version -1.9.62-0
 %global winfsp_version -2.0.23075
 
 Summary: VirtIO para-virtualized drivers for Windows(R)
 Name: virtio-win
-Version: 1.9.58
+Version: 1.9.62
 Release: 0%{?dist}
 Group: Applications/System
 License: Apache-2.0 AND BSD-3-Clause AND GPL-2.0-only AND GPL-2.0-or-later
@@ -54,6 +54,7 @@ Source82: CollectSystemInfo.ps1
 Source83: LICENSE
 Source84: README.md
 Source85: CollectSystemInfo-WinPE.ps1
+Source86: GetVirtioWinInfo.ps1
 
 %endif
 
@@ -91,6 +92,7 @@ mkdir -p iso-content/tools/debug
 %{__cp} %{SOURCE83} iso-content/tools/debug/
 %{__cp} %{SOURCE84} iso-content/tools/debug/
 %{__cp} %{SOURCE85} iso-content/tools/debug/
+%{__cp} %{SOURCE86} iso-content/tools/debug/
 %endif
 
 %if 0%{?rhel} > 7
@@ -179,6 +181,7 @@ add_link _servers_amd64.vfd
 %{__cp} %{SOURCE83} %{buildroot}/%{_datadir}/%{name}/tools/debug/
 %{__cp} %{SOURCE84} %{buildroot}/%{_datadir}/%{name}/tools/debug/
 %{__cp} %{SOURCE85} %{buildroot}/%{_datadir}/%{name}/tools/debug/
+%{__cp} %{SOURCE86} %{buildroot}/%{_datadir}/%{name}/tools/debug/
 %endif
 
 # Copy the guest agent .msi into final RPM location
@@ -259,6 +262,26 @@ add_link _servers_amd64.vfd
 %endif
 
 %changelog
+* Tue Oct 20 2026 Vadim Rozenfeld <vrozenfe@redhat.com>
+- Update installer 1.9.62.0 with the latest agents RHEL-10.2.z
+- Related: #287166
+
+* Mon Aug 23 2026 Vadim Rozenfeld <vrozenfe@redhat.com>
+- Update installer 1.9.61.0 with the latest agents RHEL-10.3
+- Related: #232802
+
+* Thu Aug 13 2026 Vadim Rozenfeld <vrozenfe@redhat.com>
+- Update installer 1.9.60.0 with the latest agents RHEL-10.3
+- Related: #232802
+
+* Thu Aug 6 2026 Vadim Rozenfeld <vrozenfe@redhat.com>
+- Update installer 1.9.59.0 with the latest agents RHEL-10.3
+- Related: #232802
+
+* Thu Jul 30 2026 Vadim Rozenfeld <vrozenfe@redhat.com>
+- Update installer 1.9.58.0 with the latest agents RHEL-10.0.z
+- Related: #220000
+
 * Wed Jul  1 2026 Vadim Rozenfeld <vrozenfe@redhat.com>
 - Update installer 1.9.58.0 with the latest agents RHEL-10.2.z
 - Related: #191136
